@@ -13,7 +13,7 @@ const App: FC = () => {
     <div className="w-full font-main bg-[#F8F9FB] fixed h-screen overflow-y-auto">
       <Router>
         <AnimatedRoutes />
-        <ToastContainer autoClose={2500} hideProgressBar theme="colored" />
+        <ToastContainer autoClose={3000} hideProgressBar theme="colored" />
       </Router>
     </div>
   );

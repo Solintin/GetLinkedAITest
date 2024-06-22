@@ -1,7 +1,41 @@
 import { MonitorRecorder } from 'iconsax-react'
-import React from 'react'
 
+import {
+    MediaPermissionsError,
+    MediaPermissionsErrorType,
+    requestMediaPermissions
+} from 'mic-check';
+import { toast } from 'react-toastify';
 
+const handleMicCheck = () => {
+    requestMediaPermissions()
+        .then(() => {
+            // can successfully access camera and microphone streams
+            // DO SOMETHING HERE
+            toast.success("Microphone Working fine")
+        })
+        .catch((err: MediaPermissionsError) => {
+            const { type, name, message } = err;
+            console.log(name);
+
+            if (type === MediaPermissionsErrorType.SystemPermissionDenied) {
+                toast.error(message)
+                // browser does not have permission to access camera or microphone
+            } else if (type === MediaPermissionsErrorType.UserPermissionDenied) {
+                toast.error(message)
+
+                // user didn't allow app to access camera or microphone
+            } else if (type === MediaPermissionsErrorType.CouldNotStartVideoSource) {
+                toast.error(message)
+                // camera is in use by another application (Zoom, Skype) or browser tab (Google Meet, Messenger Video)
+                // (mostly Windows specific problem)
+            } else {
+                toast.error("Microphone can not be accessed")
+
+                // not all error types are handled by this library
+            }
+        });
+}
 
 
 
@@ -29,6 +63,7 @@ const SingleDevice = () => {
                     size="22"
                     color="#755AE2"
                     className='font-bold'
+                    onClick={handleMicCheck}
                 />
             </div>
             <h5 className='text-[10px] text-center font-light'>Webcam</h5>

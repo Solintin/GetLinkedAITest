@@ -15,6 +15,7 @@
     "clsx": "^2.0.0",
     "framer-motion": "^10.17.12",
     "iconsax-react": "^0.0.8",
+    "mic-check": "^1.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
