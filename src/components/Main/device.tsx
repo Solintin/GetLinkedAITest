@@ -1,11 +1,13 @@
-import { MonitorRecorder } from 'iconsax-react'
-
+import { MonitorRecorder, Wifi, Danger } from 'iconsax-react'
+import { ReactInternetSpeedMeter } from 'react-internet-meter'
+//import 'react-internet-speed-meter/dist/index.css'
 import {
     MediaPermissionsError,
     MediaPermissionsErrorType,
     requestMediaPermissions
 } from 'mic-check';
 import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 const handleMicCheck = () => {
     requestMediaPermissions()
@@ -47,7 +49,7 @@ function Devices() {
             </div>
             <div className="grid grid-cols-2 gap-x-8 gap-y-2 w-[200px] ">
                 <SingleDevice />
-                <SingleDevice />
+                <InternetSpeed />
                 <SingleDevice />
                 <SingleDevice />
             </div>
@@ -70,4 +72,46 @@ const SingleDevice = () => {
         </div>
     )
 }
+
+
+const InternetSpeed = () => {
+    const [wifiSpeed, setWifiSpeed] = useState<number>(0)
+
+    console.log(wifiSpeed)
+    return (
+        <div className='rounded-[10px] bg-[#F5F3FF] px-12 py-3  grid place-content-center relative'>
+            <div className="absolute size-5 rounded-full bg-primary-100 top-0 right-0"></div>
+            <div className="bg-[#E6E0FF] rounded-full size-full flex  justify-start items-center p-3">
+                <Wifi
+                    size="22"
+                    color="#755AE2"
+                    className='font-bold'
+                    
+                />
+                 <ReactInternetSpeedMeter  
+           // txtSubHeading="Internet is too slow"
+            outputType="empty"
+            
+           // txtMainHeading="Opps..." 
+            pingInterval={4000} // milliseconds 
+            thresholdUnit='kilobyte' 
+            threshold={100}
+            imageUrl="https://res.cloudinary.com/dkdrbjfdt/image/upload/v1718833967/w8fcvsztvak416tmny45.webp"
+            downloadSize="94924"  //bytes
+           // callbackFunctionOnNetworkDown={(speed)=>console.log(`Internet speed is down ${speed}`)}
+            callbackFunctionOnNetworkTest={(speed)=>setWifiSpeed(speed)}
+          />
+            </div>
+            <h5 className='text-[10px] text-center font-light'>Internet Speed</h5>
+        </div>
+    )
+
+}
+
+
 export default Devices
+
+
+/**
+<Danger size="32" color="#FF8A65"/>
+ */
