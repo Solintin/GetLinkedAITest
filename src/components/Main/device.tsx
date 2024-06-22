@@ -77,10 +77,10 @@ const SingleDevice = () => {
 const InternetSpeed = () => {
     const [wifiSpeed, setWifiSpeed] = useState<number>(0)
 
-    console.log(wifiSpeed)
+  
     return (
         <div className='rounded-[10px] bg-[#F5F3FF] px-12 py-3  grid place-content-center relative'>
-            <div className="absolute size-5 rounded-full bg-primary-100 top-0 right-0"></div>
+            <div className="absolute w-5 h-5 rounded-full bg-primary-100 top-0 right-0"></div>
             <div className="bg-[#E6E0FF] rounded-full size-full flex  justify-start items-center p-3">
                 <Wifi
                     size="22"
@@ -94,11 +94,11 @@ const InternetSpeed = () => {
             
            // txtMainHeading="Opps..." 
             pingInterval={4000} // milliseconds 
-            thresholdUnit='kilobyte' 
-            threshold={100}
+            thresholdUnit='megabyte' 
+            threshold={1} /// MB/sec, below 1mb per sec shows low network
             imageUrl="https://res.cloudinary.com/dkdrbjfdt/image/upload/v1718833967/w8fcvsztvak416tmny45.webp"
             downloadSize="94924"  //bytes
-           // callbackFunctionOnNetworkDown={(speed)=>console.log(`Internet speed is down ${speed}`)}
+            callbackFunctionOnNetworkDown={(speed)=>console.log(`Internet speed is down ${speed}`)}
             callbackFunctionOnNetworkTest={(speed)=>setWifiSpeed(speed)}
           />
             </div>
