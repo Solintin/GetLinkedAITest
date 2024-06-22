@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 const App: FC = () => {
   // py-8 px-5
   return (
-    <div className="">
+    <div className="w-full font-main bg-[#F8F9FB] fixed h-screen overflow-y-auto">
       <Router>
         <AnimatedRoutes />
         <ToastContainer autoClose={2500} hideProgressBar theme="colored" />

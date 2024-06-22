@@ -1,15 +1,14 @@
 /* src/fonts.css */
 @font-face {
-    font-family: 'Axiforma';
-    src: url('./../public/fonts/Kastelov\ \ Axiforma\ Book.otf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-   }
-   
-   @font-face {
-    font-family: 'Axiforma';
-    src: url('./../public/fonts/Kastelov\ \ Axiforma\ Bold.otf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-   }
-   
+  font-family: '"DM Sans", sans-serif;';
+  src: url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: '"DM Sans", sans-serif;';
+  src: url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+  font-weight: bold;
+  font-style: normal;
+}

@@ -1,7 +1,14 @@
+import Footer from "components/Footer/Index"
+import Main from "components/Main"
+import TobBar from "components/Topbar"
 
 function CheckDevice() {
   return (
-    <div>Check</div>
+    <div className="w-full">
+      <TobBar />
+      <Main />
+      <Footer />
+    </div>
   )
 }
 
