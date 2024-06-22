@@ -79,7 +79,7 @@ const InternetSpeed = () => {
     <div
       className={cn(
         "rounded-[10px] bg-[#F5F3FF] px-12 py-3  grid place-content-center relative",
-        wifiSpeed < 1 && "bg-orange-100"
+        wifiSpeed < 1 && "bg-[#F5F3FF]"
       )}
     >
       {wifiSpeed > 1 ? (
