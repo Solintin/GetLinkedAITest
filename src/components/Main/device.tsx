@@ -1,6 +1,8 @@
 import { MonitorRecorder, Wifi, Danger } from "iconsax-react";
 import { ReactInternetSpeedMeter } from "react-internet-meter";
 //import 'react-internet-speed-meter/dist/index.css'
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import {
   MediaPermissionsError,
   MediaPermissionsErrorType,
@@ -89,12 +91,32 @@ const InternetSpeed = () => {
       )}
       <div
         className={cn(
-          "bg-[#E6E0FF] rounded-full size-full flex  justify-start items-center p-3",
+          "bg-[#E6E0FF] rounded-full relative size-full flex  justify-start items-center p-3",
           wifiSpeed < 1 && "bg-orange-200"
         )}
       >
+         
         {wifiSpeed < 1 ? (
-          <Danger size="32" color="#f97316" className="font-bold" />
+            <>
+         <div className="w-full inset-0 h-full absolute z-10">
+          <CircularProgressbar
+          styles={buildStyles({
+            pathColor: "#f97316",
+            trailColor: "#fed7aa",
+            textColor: "black",
+            textSize: "50px",
+            
+          })}
+          strokeWidth={5}
+          minValue={0}
+          maxValue={1}
+          value={wifiSpeed}
+          text={''}
+        />
+          </div>
+         <Danger size="32" color="#f97316" className="font-bold" />
+            </>
+         
         ) : (
           <Wifi size="22" color="#755AE2" className="font-bold" />
         )}
@@ -107,9 +129,9 @@ const InternetSpeed = () => {
           threshold={1} /// MB/sec, below 1mb per sec shows low network
           imageUrl="https://res.cloudinary.com/dkdrbjfdt/image/upload/v1718833967/w8fcvsztvak416tmny45.webp"
           downloadSize="94924" //bytes
-        //   callbackFunctionOnNetworkDown={(speed) =>
-        //     console.log(`Internet speed is down ${speed}`)
-        //   }
+          callbackFunctionOnNetworkDown={(speed) =>
+            console.log(`Internet speed is down ${speed}`)
+          }
           callbackFunctionOnNetworkTest={(speed) => setWifiSpeed(speed)}
         />
       </div>
