@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 function DeviceWebcamScreen({ setIsFaceDetected, setBrightness }: { setIsFaceDetected: (v: boolean) => void; setBrightness: (v: number) => void }) {
     const width = 315;
     const height = 188;
-    const { webcamRef, boundingBox, isLoading, detected, } = useFaceDetection({
+    const { webcamRef, boundingBox, detected, } = useFaceDetection({
         faceDetectionOptions: {
             model: 'short',
         },

@@ -1,4 +1,4 @@
-import { Microphone, MonitorRecorder } from "iconsax-react";
+import { Microphone } from "iconsax-react";
 import "react-circular-progressbar/dist/styles.css";
 import {
     MediaPermissionsError,

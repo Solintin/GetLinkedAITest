@@ -1,22 +1,28 @@
-import { MonitorRecorder } from "iconsax-react";
+import { Danger, MonitorRecorder } from "iconsax-react";
+import { cn } from "lib/utils";
 import Success from "./success";
 
 
 export const DeviceWebCamChecker = ({ isFaceDetected }: { isFaceDetected?: boolean }) => {
     return (
         <div className="rounded-[10px] bg-[#F5F3FF] px-12 py-3  grid place-content-center relative">
-            <div className="absolute h-5 w-5 rounded-full grid place-content-center bg-primary-100 top-0 right-0">
-                {isFaceDetected && <MonitorRecorder
+            <div className={cn(isFaceDetected ? "bg-primary-100" : "bg-orange-500", " rounded-full  flex items-center justify-center w-5 h-5 absolute top-0 right-0")}>
+                {<MonitorRecorder
                     size="10"
                     color="#ffffff"
                 />}
             </div>
-            {!isFaceDetected ? <div className="bg-[#E6E0FF] rounded-full size-full flex  justify-start items-center p-3">
-                <MonitorRecorder
-                    size="22"
-                    color="#755AE2"
-                />
-            </div> : <Success />}
+            {!isFaceDetected ? (<div
+                className={cn(
+                    "bg-[#E6E0FF] rounded-full relative size-full flex  justify-start items-center p-3",
+                    isFaceDetected && "bg-orange-200"
+                )}
+            >
+                <>
+                    <Danger size="22" color="#f97316" variant="Bold" />
+                </>
+
+            </div>) : <Success />}
             <h5 className="text-[10px] text-center font-light mt-1">Webcam</h5>
         </div>
     );

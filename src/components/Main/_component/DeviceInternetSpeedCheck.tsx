@@ -1,14 +1,29 @@
-import { Wifi, Danger, TickCircle } from "iconsax-react";
+import { Wifi, Danger } from "iconsax-react";
 import { ReactInternetSpeedMeter } from "react-internet-meter";
 //import 'react-internet-speed-meter/dist/index.css'
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { cn } from "lib/utils";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Success from "./success";
 
 export const InternetSpeed = () => {
     const [wifiSpeed, setWifiSpeed] = useState<number>(0);
     console.log(wifiSpeed);
+    const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
+
+    const updateNetworkStatus = () => {
+        setIsOnline(navigator.onLine);
+    };
+
+    useEffect(() => {
+        window.addEventListener('online', updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+
+        return () => {
+            window.removeEventListener('online', updateNetworkStatus);
+            window.removeEventListener('offline', updateNetworkStatus);
+        };
+    }, []);
 
 
     return (
@@ -19,7 +34,7 @@ export const InternetSpeed = () => {
             )}
         >
             {
-                <div className={cn(wifiSpeed > 1 ? "bg-primary-100" : "bg-orange-500", " rounded-full text-white flex items-center justify-center w-5 h-5 absolute top-0 right-0")}>
+                <div className={cn(wifiSpeed > 1 && isOnline ? "bg-primary-100" : "bg-orange-500", " rounded-full text-white flex items-center justify-center w-5 h-5 absolute top-0 right-0")}>
                     <Wifi size="10" color="#ffffff" variant="Bold" />
                 </div>
             }
