@@ -6,8 +6,14 @@ import {
     requestMediaPermissions
 } from 'mic-check';
 import { toast } from 'react-toastify';
+import Webcam from 'react-webcam';
+import { CameraOptions, useFaceDetection } from 'react-use-face-detection';
+import FaceDetection from '@mediapipe/face_detection';
+import { Camera } from '@mediapipe/camera_utils';
+
 
 const handleMicCheck = () => {
+
     requestMediaPermissions()
         .then(() => {
             // can successfully access camera and microphone streams
@@ -40,10 +46,51 @@ const handleMicCheck = () => {
 
 
 function Devices() {
+    const width = 315;
+    const height = 188;
+    const { webcamRef, boundingBox, isLoading, detected, facesDetected } = useFaceDetection({
+        faceDetectionOptions: {
+            model: 'short',
+        },
+        faceDetection: new FaceDetection.FaceDetection({
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`,
+        }),
+        camera: ({ mediaSrc, onFrame }: CameraOptions) =>
+            new Camera(mediaSrc, {
+                onFrame,
+                width,
+                height,
+            }),
+    });
     return (
         <div className='w-full mt-10 flex items-center space-x-6'>
-            <div className="w-[315px] h-[188px] rounded-[10px] border border-primary-100">
-
+            <div className="w-[315px] h-[188px] relative rounded-[10px] border border-primary-100">
+                {boundingBox.map((box, index) => (
+                    <div
+                        key={`${index + 1}`}
+                        style={{
+                            border: '2px solid lightgreen',
+                            position: 'absolute',
+                            borderRadius: "10px",
+                            top: `${box.yCenter * 100}%`,
+                            left: `${box.xCenter * 100}%`,
+                            width: `${box.width * 100}%`,
+                            height: `${box.height * 100}%`,
+                            zIndex: 1,
+                        }}
+                        className="rounded-[10px]"
+                    />
+                ))}
+                <Webcam
+                    ref={webcamRef}
+                    forceScreenshotSourceSize
+                    style={{
+                        height,
+                        width,
+                        position: 'absolute',
+                        borderRadius: "10px",
+                    }}
+                />
             </div>
             <div className="grid grid-cols-2 gap-x-8 gap-y-2 w-[200px] ">
                 <SingleDevice />
