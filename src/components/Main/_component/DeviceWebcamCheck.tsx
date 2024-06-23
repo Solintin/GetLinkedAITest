@@ -15,7 +15,7 @@ export const DeviceWebCamChecker = ({ isFaceDetected }: { isFaceDetected?: boole
             {!isFaceDetected ? (<div
                 className={cn(
                     "bg-[#E6E0FF] rounded-full relative size-full flex  justify-start items-center p-3",
-                    isFaceDetected && "bg-orange-200"
+                    isFaceDetected && "bg-[#FF5F56]"
                 )}
             >
                 <>
