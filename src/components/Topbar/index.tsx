@@ -1,5 +1,7 @@
 import Logo from '../../assets/logo.svg'
 import { TimerStart, Eye } from 'iconsax-react';
+import { useCountdown } from "usehooks-ts";
+import { useEffect } from 'react';
 
 
 function TobBar() {
@@ -35,9 +37,20 @@ const LeftComp = ({ imgSrc, header, title }: { imgSrc?: string, header?: string,
     )
 }
 const RightComp = () => {
+    const countStart = 60 * 5;
+    const [count, { startCountdown }] = useCountdown({
+        countStart,
+        intervalMs: 1000,
+    });
+    const isCounting = count > 0 && count < countStart;
+
+    useEffect(() => {
+        startCountdown();
+    }, [startCountdown]);
+
     return (
         <div className='flex space-x-2 items-center'>
-            <div className="rounded-md bg-[#ECE8FF] py-2 pl-3 pr-6 w-full flex items-center space-x-3">
+            {isCounting ? <div className="rounded-md bg-[#ECE8FF] py-2 pl-3 pr-6 w-full flex items-center space-x-3">
                 <div className='w-6 h-6 rounded-full grid place-content-center p-4 bg-[#E6E0FF]'>
                     <TimerStart
                         size="22"
@@ -46,9 +59,12 @@ const RightComp = () => {
                     />
                 </div>
                 <div className='flex items-center text-lg text-[#755AE2]'>
-                    <span className='font-bold text-xl mr-1'>29:10</span><span className='text-sm'>time left</span>
+                    <span className='font-bold text-xl mr-1'>
+                        {String(Math.floor(count / 60)).padStart(2, "0")}:
+                        {String(Math.floor(count % 60)).padStart(2, "0")}
+                    </span><span className='text-sm'>time left</span>
                 </div>
-            </div>
+            </div> : <div className='text-red-500 font-medium'>Time Up</div>}
             <div className='w-6 h-6 rounded-full grid place-content-center p-4 bg-[#E6E0FF]'>
                 <Eye
                     size="20"
