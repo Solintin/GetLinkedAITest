@@ -40,7 +40,7 @@ export const InternetSpeed = () => {
             }
             {wifiSpeed < 1 ? (<div
                 className={cn(
-                    "bg-[#E6E0FF] rounded-full relative size-full flex  justify-start items-center p-3",
+                    "bg-[#E6E0FF] rounded-full relative h-12 w-12 flex  justify-start items-center p-3",
                     wifiSpeed < 1 && "bg-orange-200"
                 )}
             >
