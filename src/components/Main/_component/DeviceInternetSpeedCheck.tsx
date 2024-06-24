@@ -30,7 +30,7 @@ export const InternetSpeed = () => {
         <div
             className={cn(
                 "rounded-[10px] bg-[#F5F3FF] px-12 py-3  w-full flex flex-col items-center relative",
-                wifiSpeed < 1 && "bg-[#F5F3FF]"
+                (wifiSpeed < 1 || !isOnline) && "bg-[#F5F3FF]"
             )}
         >
             {
@@ -38,10 +38,10 @@ export const InternetSpeed = () => {
                     <Wifi size="10" color="#ffffff" variant="Bold" />
                 </div>
             }
-            {wifiSpeed < 1 ? (<div
+            {wifiSpeed < 1 || !isOnline ? (<div
                 className={cn(
                     "bg-[#E6E0FF] rounded-full relative h-12 w-12 flex  justify-start items-center p-3",
-                    wifiSpeed < 1 && "bg-orange-200"
+                    (wifiSpeed < 1 || !isOnline) && "bg-orange-200"
                 )}
             >
 
